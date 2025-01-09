@@ -40,3 +40,47 @@ trainX, testX, trainY, testY = train_test_split(x_scaled, y, test_size=0.3, rand
 model = LogisticRegression()
 model.fit(trainX, trainY)
 
+# Predictions for training and testing data
+y_train_pred = model.predict(trainX)
+y_test_pred = model.predict(testX)
+
+# Calculate accuracy
+train_accuracy = accuracy_score(trainY, y_train_pred)
+print(f"Training Accuracy: {train_accuracy:.2f}")
+
+test_accuracy = accuracy_score(testY, y_test_pred)
+print(f"Test Accuracy: {test_accuracy:.2f}")
+
+# Predictions for training and testing data
+y_train_pred = model.predict(trainX)
+y_test_pred = model.predict(testX)
+
+# Calculate accuracy
+train_accuracy = accuracy_score(trainY, y_train_pred)
+print(f"Training Accuracy: {train_accuracy:.2f}")
+
+test_accuracy = accuracy_score(testY, y_test_pred)
+print(f"Test Accuracy: {test_accuracy:.2f}")
+
+# Plot actual vs predicted for training data
+plt.figure(figsize=(12, 6))
+plt.scatter(range(len(trainY)), trainY, color='green', label='Actual Labels', alpha=0.5)
+plt.scatter(range(len(trainY)), y_train_pred, color='blue', label='Predicted Labels', alpha=0.5)
+plt.title('Training Data: Actual vs Predicted Labels')
+plt.xlabel('Sample Index')
+plt.ylabel('Label (0 or 1)')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Plot actual vs predicted for test data
+plt.figure(figsize=(12, 6))
+plt.scatter(range(len(testY)), testY, color='green', label='Actual Labels', alpha=0.5)
+plt.scatter(range(len(testY)), y_test_pred, color='blue', label='Predicted Labels', alpha=0.5)
+plt.title('Test Data: Actual vs Predicted Labels')
+plt.xlabel('Sample Index')
+plt.ylabel('Label (0 or 1)')
+plt.legend()
+plt.grid(True)
+plt.show()
+
