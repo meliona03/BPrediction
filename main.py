@@ -25,3 +25,18 @@ plt.xlabel("Diagnosis (0: Benign, 1: Malignant)")
 plt.ylabel("Count")
 plt.show()
 
+# Prepare features and target
+x = df.drop(df.columns[1], axis=1)  # Drop the first column (index 0)
+y = df['diagnosis']
+
+# Standardize the features
+scaler = StandardScaler()
+x_scaled = scaler.fit_transform(x)
+
+# Split the data into training and testing sets
+trainX, testX, trainY, testY = train_test_split(x_scaled, y, test_size=0.3, random_state=43)
+
+# Create Logistic Regression model
+model = LogisticRegression()
+model.fit(trainX, trainY)
+
