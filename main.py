@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 from sklearn.linear_model import LogisticRegression
 import numpy as np
 
@@ -51,17 +51,6 @@ print(f"Training Accuracy: {train_accuracy:.2f}")
 test_accuracy = accuracy_score(testY, y_test_pred)
 print(f"Test Accuracy: {test_accuracy:.2f}")
 
-# Predictions for training and testing data
-y_train_pred = model.predict(trainX)
-y_test_pred = model.predict(testX)
-
-# Calculate accuracy
-train_accuracy = accuracy_score(trainY, y_train_pred)
-print(f"Training Accuracy: {train_accuracy:.2f}")
-
-test_accuracy = accuracy_score(testY, y_test_pred)
-print(f"Test Accuracy: {test_accuracy:.2f}")
-
 # Plot actual vs predicted for training data
 plt.figure(figsize=(12, 6))
 plt.scatter(range(len(trainY)), trainY, color='green', label='Actual Labels', alpha=0.5)
@@ -84,3 +73,18 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
+# Confusion Matrix for Training Data
+conf_matrix_train = confusion_matrix(trainY, y_train_pred)
+print("Confusion Matrix (Training Data):\n", conf_matrix_train)
+disp_train = ConfusionMatrixDisplay(conf_matrix_train, display_labels=["Benign (0)", "Malignant (1)"])
+disp_train.plot(cmap="Blues")
+plt.title("Confusion Matrix - Training Data")
+plt.show()
+
+# Confusion Matrix for Test Data
+conf_matrix_test = confusion_matrix(testY, y_test_pred)
+print("Confusion Matrix (Test Data):\n", conf_matrix_test)
+disp_test = ConfusionMatrixDisplay(conf_matrix_test, display_labels=["Benign (0)", "Malignant (1)"])
+disp_test.plot(cmap="Oranges")
+plt.title("Confusion Matrix - Test Data")
+plt.show()
